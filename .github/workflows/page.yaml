@@ -1,0 +1,54 @@
+name: Page
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Check branch
+        run: |
+          if [[ ! `git branch --show-current` = 'main' ]] ; then
+            echo "Releases can only be created from the \`main\` branch" >&2
+            exit 1
+          fi
+
+      - name: Get upcoming version
+        id: bump_version
+        run: |
+          version=`scripts/ci/bump_version.py --dry-run`
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Fetch badge
+        run: |
+          mkdir _site
+          curl "https://img.shields.io/badge/upcoming_version-v${VERSION}-blue" > "_site/upcoming_version.svg"
+        env:
+          VERSION: ${{ steps.bump_version.outputs.version }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: "_site/"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
