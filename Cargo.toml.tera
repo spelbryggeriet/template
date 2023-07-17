@@ -7,7 +7,7 @@ readme = "README.md"
 homepage = "https://github.com/spelbryggeriet/{{ name }}"
 repository = "https://github.com/spelbryggeriet/{{ name }}"
 license = "Apache-2.0"
-keywords = [{% for keyword in keywords | slice(end=-1) %}"{{ keyword }}", {% endfor %}{% if keywords | length >= 1 %}"{{ keywords | last }}"{% endif %}]
-categories = [{% for category in categories | slice(end=-1) %}"{{ category }}", {% endfor %}{% if categories | length >= 1 %}"{{ categories | last }}"{% endif %}]
+keywords = {{ keywords | json_encode() }}
+categories = {{ categories | json_encode() }}
 
 [dependencies]
