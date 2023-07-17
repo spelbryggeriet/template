@@ -1,0 +1,14 @@
+# Cargo
+/target
+{% if package_type == "lib" -%}
+/Cargo.lock
+{%- endif %}
+
+# Python
+__pycache__
+
+# Editors
+.vscode
+
+# macOS
+.DS_Store
