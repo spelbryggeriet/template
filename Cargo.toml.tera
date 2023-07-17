@@ -9,5 +9,3 @@ repository = "https://github.com/spelbryggeriet/{{ name }}"
 license = "Apache-2.0"
 keywords = {{ keywords | json_encode() }}
 categories = {{ categories | json_encode() }}
-
-[dependencies]
