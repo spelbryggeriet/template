@@ -168,4 +168,3 @@ if __name__ == "__main__":
         dry_run = True
 
     print(bump_version(dry_run))
-
