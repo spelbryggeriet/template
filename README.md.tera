@@ -2,7 +2,9 @@
 
 [![Build Status](https://github.com/spelbryggeriet/{{ name }}/workflows/CI/badge.svg)](https://github.com/spelbryggeriet/{{ name }}/actions?query=workflow:CI)
 [![Crate Status](https://img.shields.io/crates/v/{{ name }}.svg)](https://crates.io/crates/{{ name }})
+{% if package_type == "lib" -%}
 [![Docs Status](https://docs.rs/{{ name }}/badge.svg)](https://docs.rs/{{ name }}/latest/{{ name }})
+{%- endif %}
 ![Upcoming Version](https://spelbryggeriet.github.io/{{ name }}/upcoming_version.svg)
 
 {{ description }}
