@@ -38,5 +38,3 @@ def get_changelog_body():
 
 if __name__ == "__main__":
     print(get_changelog_body())
-
-
